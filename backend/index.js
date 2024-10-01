@@ -3,7 +3,7 @@ const { createTodo } = require("./schema");
 const { todoModel } = require("./db");
 const app = express();
 const PORT = 3000;
-app.use(json());
+app.use(express.json());
 
 app.post("/addTodo", async function(req, res){
     const createNewTodo = req.body;
