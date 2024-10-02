@@ -26,6 +26,24 @@ app.post("/addTodo", async function(req, res){
     })
 })
 
+app.get("/getTodos", async function(req, res){
+    const allTodos = await todoModel.find({});
+    res.status(200).json({
+        allTodos: allTodos
+    })
+})
+
+app.post("/todoCompleted", async function(req, res){
+    await todoModel.findOneAndUpdate({
+        _id: req.body.id,
+    }, {
+        $set: {
+            completed : true
+        }
+    })
+    res.json("Todo updated")
+})
+
 app.listen(PORT, () => {
     console.log(`Server initialised on port ${PORT}`);
 })
