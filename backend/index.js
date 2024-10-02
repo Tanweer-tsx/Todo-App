@@ -41,7 +41,7 @@ app.post("/todoCompleted", async function(req, res){
             completed : true
         }
     })
-    res.json("Todo updated")
+    res.json("Todo marked as completed")
 })
 
 app.listen(PORT, () => {
