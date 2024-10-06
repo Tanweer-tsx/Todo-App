@@ -1,22 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import { CreateTodo } from "./components/CreateTodo";
 import { Todos } from "./components/Todos";
+
 function App() {
   const [todos, setTodos] = useState([]);
 
-  fetch("http://localhost:3000/getTodos")
-    .then(async function(res){
-      const json = await res.json();
-      setTodos(json.todos); 
-    })
+  useEffect(() => {
+    const fetchTodos = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/getTodos");
+        const data = await response.json();
+        setTodos(data);
+      } catch (error) {
+        console.error("Error fetching todos:", error);
+      }
+    };
+
+    fetchTodos();
+  }, []);
 
   return (
     <div>
       <CreateTodo />
-      <Todos
-        todos={todos}
-      />
+      <Todos todos={todos} />
     </div>
   );
 }
