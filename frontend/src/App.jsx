@@ -11,7 +11,7 @@ function App() {
       try {
         const response = await fetch("http://localhost:3000/getTodos");
         const data = await response.json();
-        setTodos(data);
+        setTodos(data.allTodos);
       } catch (error) {
         console.error("Error fetching todos:", error);
       }
